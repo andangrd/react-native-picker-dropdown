@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import ReactNative, { Platform, TouchableOpacity, Text, StyleSheet, ActionSheetIOS } from 'react-native'
 
 export default class Picker extends Component {
+  constructor(props){
+    super(props);
+
+    this.handlePress = this.handlePress.bind(this)
+  }
   static Item = ReactNative.Picker.Item
 
   handlePress() {
@@ -31,18 +36,18 @@ export default class Picker extends Component {
       const { selectedValue } = this.props
       const flatStyle = (style ? StyleSheet.flatten(style) : {})
       const textStyle = {
-        fontSize: 12,
+        fontSize: 18,
         lineHeight: (flatStyle.height ? flatStyle.height : 12),
       }
       return(
         <TouchableOpacity
-          onPress={::this.handlePress}
+          onPress={this.handlePress}
           style={{
             alignSelf: 'stretch',
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'row',
-            paddingHorizontal: 6,
+            paddingHorizontal: 10
           }}
         >
           <Text style={[{
@@ -50,7 +55,7 @@ export default class Picker extends Component {
           }, textStyle, style]}>
             {labels[values.indexOf(selectedValue)]}
           </Text>
-          <Text style={[textStyle, style, {color: 'black'}]}>▼</Text>
+          <Text style={[textStyle, style, {color: '#a5a5a5'}]}>▼</Text>
         </TouchableOpacity>
       )
     } else {
